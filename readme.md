@@ -1,11 +1,14 @@
-#First Step
+# First Step
 
-Create virtual environement
+## Create virtual environement
 
-$ python -m venv env
+```
+python -m venv env
+```
 
-Activate virtual Environement
+## Activate virtual Environement
 
+```
     MacOS
         $ source env/bin/activate
 
@@ -14,5 +17,6 @@ Activate virtual Environement
 
     Linux
         $ source env/bin/activate
+```
 
-Enjoy :)
+# Enjoy :)
