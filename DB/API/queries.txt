@@ -1,0 +1,87 @@
+drop_lake = """
+DROP SCHEMA lake CASCADE;
+"""
+create_lake = """  CREATE SCHEMA IF NOT EXISTS lake
+AUTHORIZATION postgres"""
+
+drop_table_hive = """ 
+    ALTER TABLE lake.hive_data DROP CONSTRAINT hive_data_hive_id_fkey; 
+    DROP TABLE lake.hive 
+"""
+
+drop_table_user= """ 
+    DROP TABLE lake.user 
+"""
+
+drop_table_hive_data = """ 
+    ALTER TABLE lake.hive_data DROP CONSTRAINT hive_data_hive_id_fkey; 
+    DROP TABLE lake.hive 
+"""
+
+drop_table_session = """ 
+    ALTER TABLE lake.hive_data DROP CONSTRAINT hive_data_hive_id_fkey; 
+    DROP TABLE lake.hive 
+"""
+
+#creation of enums and types
+
+create_enum_role = """
+CREATE TYPE Role AS ENUM ('ADMIN', 'USER');
+"""
+
+create_enum_provider = """
+CREATE TYPE Provider AS ENUM ('GOOGLE', 'LOCAL');
+"""
+
+create_enum_status = """
+CREATE TYPE Status AS ENUM ('ACTIVE', 'DELETED', 'DESACTIVATED');
+"""
+
+#creation of tables
+
+create_table_user = """
+    CREATE TABLE lake.user (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255),
+    provider Provider NOT NULL,
+    notified BOOLEAN DEFAULT TRUE,
+    createdAt TIMESTAMP DEFAULT now(),
+    updatedAt TIMESTAMP DEFAULT now(),
+    role Role DEFAULT 'USER'
+);
+"""
+create_table_hive = """
+    CREATE TABLE lake.hive (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        name VARCHAR(255) UNIQUE NOT NULL,
+        createdAt TIMESTAMP DEFAULT now(),
+        updatedAt TIMESTAMP DEFAULT now(),
+        description TEXT DEFAULT '',
+        userHasAccess BOOLEAN DEFAULT TRUE,
+        status Status DEFAULT 'ACTIVE',
+        userId UUID NOT NULL,
+        CONSTRAINT fk_user FOREIGN KEY (userId) REFERENCES "user" (id) ON DELETE CASCADE
+);
+"""
+create_table_hive_data = """
+    CREATE TABLE lake.hive_data (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        createdAt TIMESTAMP DEFAULT now(),
+        hiveId UUID NOT NULL,
+        temperature FLOAT DEFAULT 0,
+        humidity FLOAT DEFAULT 0,
+        weight FLOAT DEFAULT 0,
+        inclination BOOLEAN DEFAULT FALSE,
+        CONSTRAINT fk_hive FOREIGN KEY (hiveId) REFERENCES Hive (id) ON DELETE CASCADE
+);
+"""
+
+create_table_session = """
+    CREATE TABLE lake.session (
+        sid VARCHAR(255) PRIMARY KEY DEFAULT uuid_generate_v4(),
+        sess JSON NOT NULL,
+        expire TIMESTAMP(6) NOT NULL
+);
+"""
