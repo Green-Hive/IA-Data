@@ -1,5 +1,11 @@
 # First Step
 
+Install venv if not done yet
+
+```
+pip install virtualenv
+```
+
 ## Create virtual environement
 
 ```
