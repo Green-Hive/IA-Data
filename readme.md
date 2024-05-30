@@ -30,7 +30,7 @@ python -m venv env
 
 ```
 
-pip install -r /DB/API/requirements.txt
+pip install -r db/api/requirements.txt
 ```
 
 # Enjoy :)
