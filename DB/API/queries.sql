@@ -18,15 +18,15 @@ CREATE TABLE lake.user (
     name VARCHAR(255) NOT NULL,
     password VARCHAR(255),
     provider Provider NOT NULL,
-    notified BOOLEAN,
     createdAt TIMESTAMP ,
     updatedAt TIMESTAMP,
-    role Role
+    role Role,
+    notified BOOLEAN
 );
 
 CREATE TABLE lake.hive (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        createdAt TIMEST AMP,
+        createdAt TIMESTAMP,
         updatedAt TIMESTAMP,
         description TEXT DEFAULT '',
         userId UUID NOT NULL,
@@ -39,18 +39,19 @@ CREATE TABLE lake.hive (
 CREATE TABLE lake.hive_data (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         createdAt TIMESTAMP,
-        hiveId TEXT NOT NULL,
-        tempBottomLeft FLOAT,
-        tempTopRight FLOAT,
-        tempOutside FLOAT,
-        pressure FLOAT,
-        humidityBottomLeft FLOAT,
-        humidityTopRight FLOAT,
-        humidityOutside FLOAT,
+        hiveId UUID NOT NULL,
         weight FLOAT,
+        humidityBottomLeft FLOAT,
+        humidityOutside FLOAT,
+        humidityTopRight FLOAT,
         magnetic_x FLOAT,
         magnetic_y FLOAT,
-        magnetic_z FLOAT
+        magnetic_z FLOAT,
+        pressure FLOAT,
+        tempBottomLeft FLOAT,
+        tempOutside FLOAT,
+        tempTopRight FLOAT,
+        time TIMESTAMP,
         CONSTRAINT fk_hive FOREIGN KEY (hiveId) REFERENCES Hive (id) ON DELETE CASCADE
 );
 

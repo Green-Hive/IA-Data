@@ -1,6 +1,8 @@
 import configparser
 import psycopg2
 import pandas as pd
+import os
+
 
 class Lake:
     
@@ -41,8 +43,8 @@ class Lake:
 
             df = pd.DataFrame(result_source, columns=colnames)
             target = table.replace('"', "")
-            df.to_csv(f'./New Data/{target}.csv', sep=';', index=False)
-            print(f'{target}.csv crée avec succès')
+            df.to_csv(f'{target}.csv', sep=';', index=False)
+            print(f'{target}.csv successfully created')
         except (Exception, psycopg2.DatabaseError) as error:
             print(f"Erreur: {error}")
             conn.rollback()
@@ -62,7 +64,7 @@ class Lake:
             # Exécuter les requêtes SQL
             cursor.execute(queries)
             conn.commit()
-            print("Base de données réinitialisée avec succès.")
+            print("Database successfully reset.")
         except (Exception, psycopg2.DatabaseError) as error:
             print(f"Erreur: {error}")
             conn.rollback()
@@ -84,6 +86,7 @@ class Lake:
             finally:
                 cursor.close()
                 conn.close() 
+                os.remove(csv_file_path)
 
 
 
@@ -103,7 +106,7 @@ lake.remake_db(env='TARGET')
 
 for i in range(len(tables_target)):
     file_name = tables_source[i].replace('"','') 
-    file_name_raw =  fr".\New Data\{file_name}.csv"
+    file_name_raw =  fr"{file_name}.csv"
 
     lake.copy_from_csv(env='TARGET', table=tables_target[i], csv_file_path=file_name_raw)
 
