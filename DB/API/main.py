@@ -1,7 +1,7 @@
 import os
-import psycopg2
-import pandas as pd
-from dotenv import load_dotenv
+import psycopg2 # type: ignore
+import pandas as pd # type: ignore
+from dotenv import load_dotenv # type: ignore
 
 load_dotenv()  # Load environment variables from .env file
 
