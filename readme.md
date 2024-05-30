@@ -1,10 +1,11 @@
 # First Step
 
-Install depedencies first by executing
+## Install venv first 
 
 ```
-pip install -r requirements.txt
+pip install virtualenv
 ```
+
 
 ## Create virtual environement
 
@@ -23,6 +24,13 @@ python -m venv env
 
     Linux
         $ source env/bin/activate
+```
+
+## Install depedencies
+
+```
+
+pip install -r /DB/API/requirements.txt
 ```
 
 # Enjoy :)
