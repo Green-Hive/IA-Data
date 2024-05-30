@@ -10,20 +10,20 @@ pip install virtualenv
 ## Create virtual environement
 
 ```
-python -m venv env
+python -m venv local
 ```
 
 ## Activate virtual Environement
 
 ```
     MacOS
-        $ source env/bin/activate
+        $ source local/bin/activate
 
     Windows
-        $ .\env\Scripts\activate
+        $ .\local\Scripts\activate
 
     Linux
-        $ source env/bin/activate
+        $ source local/bin/activate
 ```
 
 ## Install depedencies

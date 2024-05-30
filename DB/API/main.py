@@ -1,7 +1,9 @@
-import psycopg2 # type: ignore
-import pandas as pd # type: ignore
 import os
+import psycopg2
+import pandas as pd
+from dotenv import load_dotenv
 
+load_dotenv()  # Load environment variables from .env file
 
 class Lake:
     
@@ -88,16 +90,15 @@ class Lake:
 
 
 
+
+
 # Usage
-lake = Lake(conf='cred.ini', queries='queries.sql')
+lake = Lake(queries='queries.sql')
 
 tables_source = ['"User"','"Hive"','"HiveData"','"Session"']
 tables_target = ['"user"','"hive"','"hive_data"','"session"']
 
-schema_source = 'public.'
-
 for table in tables_source:
-    schema = 'public'
     lake.get_source_data(env_prefix='SOURCE',schema='public', table=table)
 
 lake.remake_db(env_prefix='TARGET')
