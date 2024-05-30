@@ -1,9 +1,9 @@
 # First Step
 
-Install venv if not done yet
+Install depedencies first by executing
 
 ```
-pip install virtualenv
+pip install -r requirements.txt
 ```
 
 ## Create virtual environement
