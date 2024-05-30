@@ -1,3 +1,6 @@
 *.ini
 ./env
 *.csv
+*.ipynb
+*.env
+/local

@@ -1,21 +1,23 @@
-import configparser
-import psycopg2
-import pandas as pd
+import os
+import psycopg2 # type: ignore
+import pandas as pd # type: ignore
+from dotenv import load_dotenv # type: ignore
+
+load_dotenv()  # Load environment variables from .env file
 
 class Lake:
     
-    def __init__(self, conf,queries):
-        self.config = configparser.ConfigParser()
-        self.config.read(conf)
+    def __init__(self, queries):
         self.queries = queries
 
-    def __connect_db(self, env):
-        db = self.config[env]['database']
-        usr = self.config[env]['user']
-        pswrd = self.config[env]['password']
-        host = self.config[env]['host']
-        port = self.config[env]['port']
-        option = f"-c search_path=dbo,{self.config[env]['schema']}"
+    def __connect_db(self, env_prefix):
+        db = os.getenv(f'{env_prefix}_DB_NAME')
+        usr = os.getenv(f'{env_prefix}_DB_USER')
+        pswrd = os.getenv(f'{env_prefix}_DB_PASSWORD')
+        host = os.getenv(f'{env_prefix}_DB_HOST')
+        port = os.getenv(f'{env_prefix}_DB_PORT')
+        schema = os.getenv(f'{env_prefix}_DB_SCHEMA')
+        option = f"-c search_path=dbo,{schema}"
 
         conn = psycopg2.connect(
             database=db, 
@@ -27,8 +29,8 @@ class Lake:
         )
         return conn
 
-    def get_source_data(self, env, schema, table):
-        conn = self.__connect_db(env)
+    def get_source_data(self, env_prefix, schema, table):
+        conn = self.__connect_db(env_prefix)
         cursor = conn.cursor()
 
         try:
@@ -41,8 +43,8 @@ class Lake:
 
             df = pd.DataFrame(result_source, columns=colnames)
             target = table.replace('"', "")
-            df.to_csv(f'./New Data/{target}.csv', sep=';', index=False)
-            print(f'{target}.csv crée avec succès')
+            df.to_csv(f'{target}.csv', sep=';', index=False)
+            print(f'{target}.csv successfully created')
         except (Exception, psycopg2.DatabaseError) as error:
             print(f"Erreur: {error}")
             conn.rollback()
@@ -50,8 +52,8 @@ class Lake:
             cursor.close()
             conn.close()
     
-    def remake_db(self,env):
-        conn = self.__connect_db(env)
+    def remake_db(self,env_prefix):
+        conn = self.__connect_db(env_prefix)
         cursor = conn.cursor()
         file_path = self.queries
         try:
@@ -62,15 +64,15 @@ class Lake:
             # Exécuter les requêtes SQL
             cursor.execute(queries)
             conn.commit()
-            print("Base de données réinitialisée avec succès.")
+            print("Database successfully reset.")
         except (Exception, psycopg2.DatabaseError) as error:
             print(f"Erreur: {error}")
             conn.rollback()
         finally:
             cursor.close()
     
-    def copy_from_csv(self, env, table, csv_file_path):
-        conn = self.__connect_db(env)
+    def copy_from_csv(self, env_prefix, table, csv_file_path):
+        conn = self.__connect_db(env_prefix)
         cursor = conn.cursor()
         with conn.cursor() as cursor:
             try:
@@ -84,28 +86,28 @@ class Lake:
             finally:
                 cursor.close()
                 conn.close() 
+                os.remove(csv_file_path)
+
+
 
 
 
 # Usage
-lake = Lake(conf='cred.ini', queries='queries.sql')
+lake = Lake(queries='queries.sql')
 
 tables_source = ['"User"','"Hive"','"HiveData"','"Session"']
 tables_target = ['"user"','"hive"','"hive_data"','"session"']
 
-schema_source = 'public.'
-
 for table in tables_source:
-    schema = 'public'
-    lake.get_source_data(env='SOURCE',schema='public', table=table)
+    lake.get_source_data(env_prefix='SOURCE',schema='public', table=table)
 
-lake.remake_db(env='TARGET')
+lake.remake_db(env_prefix='TARGET')
 
 for i in range(len(tables_target)):
     file_name = tables_source[i].replace('"','') 
-    file_name_raw =  fr".\New Data\{file_name}.csv"
+    file_name_raw =  fr"{file_name}.csv"
 
-    lake.copy_from_csv(env='TARGET', table=tables_target[i], csv_file_path=file_name_raw)
+    lake.copy_from_csv(env_prefix='TARGET', table=tables_target[i], csv_file_path=file_name_raw)
 
 
 

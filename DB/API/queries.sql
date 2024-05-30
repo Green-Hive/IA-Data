@@ -8,7 +8,6 @@ AUTHORIZATION postgres;
 
 CREATE TYPE  Role AS ENUM ('ADMIN', 'USER');
 CREATE TYPE Provider AS ENUM ('GOOGLE', 'LOCAL');
-CREATE TYPE Status AS ENUM ('ACTIVE', 'DELETED', 'DESACTIVATED');
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
@@ -19,32 +18,40 @@ CREATE TABLE lake.user (
     name VARCHAR(255) NOT NULL,
     password VARCHAR(255),
     provider Provider NOT NULL,
-    createdAt TIMESTAMP DEFAULT now(),
-    updatedAt TIMESTAMP DEFAULT now(),
-    role Role DEFAULT 'USER',
-    notified BOOLEAN DEFAULT TRUE
+    createdAt TIMESTAMP ,
+    updatedAt TIMESTAMP,
+    role Role,
+    notified BOOLEAN
 );
 
 CREATE TABLE lake.hive (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        createdAt TIMESTAMP DEFAULT now(),
-        updatedAt TIMESTAMP DEFAULT now(),
+        createdAt TIMESTAMP,
+        updatedAt TIMESTAMP,
         description TEXT DEFAULT '',
         userId UUID NOT NULL,
         name VARCHAR(255) UNIQUE NOT NULL,
-        userHasAccess BOOLEAN DEFAULT TRUE,
+        userHasAccess BOOLEAN,
         --status Status DEFAULT 'ACTIVE',
         CONSTRAINT fk_user FOREIGN KEY (userId) REFERENCES "user" (id) ON DELETE CASCADE
 );
 
 CREATE TABLE lake.hive_data (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        createdAt TIMESTAMP DEFAULT now(),
+        createdAt TIMESTAMP,
         hiveId UUID NOT NULL,
-        weight FLOAT DEFAULT 0,
-        inclination BOOLEAN DEFAULT FALSE,
-        humidity FLOAT DEFAULT 0,
-        temperature FLOAT DEFAULT 0,
+        weight FLOAT,
+        humidityBottomLeft FLOAT,
+        humidityOutside FLOAT,
+        humidityTopRight FLOAT,
+        magnetic_x FLOAT,
+        magnetic_y FLOAT,
+        magnetic_z FLOAT,
+        pressure FLOAT,
+        tempBottomLeft FLOAT,
+        tempOutside FLOAT,
+        tempTopRight FLOAT,
+        time TIMESTAMP,
         CONSTRAINT fk_hive FOREIGN KEY (hiveId) REFERENCES Hive (id) ON DELETE CASCADE
 );
 

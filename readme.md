@@ -1,28 +1,36 @@
 # First Step
 
-Install depedencies first by executing
+## Install venv first 
 
 ```
-pip install -r requirements.txt
+pip install virtualenv
 ```
+
 
 ## Create virtual environement
 
 ```
-python -m venv env
+python -m venv local
 ```
 
 ## Activate virtual Environement
 
 ```
     MacOS
-        $ source env/bin/activate
+        $ source local/bin/activate
 
     Windows
-        $ .\env\Scripts\activate
+        $ .\local\Scripts\activate
 
     Linux
-        $ source env/bin/activate
+        $ source local/bin/activate
+```
+
+## Install depedencies
+
+```
+
+pip install -r ./DB/API/requirements.txt
 ```
 
 # Enjoy :)
