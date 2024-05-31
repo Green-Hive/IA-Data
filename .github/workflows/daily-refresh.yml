@@ -2,7 +2,8 @@ name: Run main.py
 
 on:
   schedule:
-    - cron: '10 10 * * *'
+    - cron: '00 05 * * *'
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -21,6 +22,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
     - name: Run the script
       env:
         SOURCE_DB_NAME: ${{ secrets.SOURCE_DB_NAME }}
@@ -35,4 +37,4 @@ jobs:
         TARGET_DB_HOST: ${{ secrets.TARGET_DB_HOST }}
         TARGET_DB_PORT: ${{ secrets.TARGET_DB_PORT }}
         TARGET_DB_SCHEMA: ${{ secrets.TARGET_DB_SCHEMA }}
-      run: python ./DB/API/main.py 
+      run: python ./DB/API/main.py
