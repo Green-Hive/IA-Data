@@ -37,4 +37,4 @@ jobs:
         TARGET_DB_HOST: ${{ secrets.TARGET_DB_HOST }}
         TARGET_DB_PORT: ${{ secrets.TARGET_DB_PORT }}
         TARGET_DB_SCHEMA: ${{ secrets.TARGET_DB_SCHEMA }}
-      run: python ./DB/API/main.py
+      run: cd ./DB/API/ && python main.py
