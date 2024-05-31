@@ -51,7 +51,7 @@ CREATE TABLE lake.hive_data (
         tempBottomLeft FLOAT,
         tempOutside FLOAT,
         tempTopRight FLOAT,
-        time TIMESTAMP,
+        time TEXT,
         CONSTRAINT fk_hive FOREIGN KEY (hiveId) REFERENCES Hive (id) ON DELETE CASCADE
 );
 

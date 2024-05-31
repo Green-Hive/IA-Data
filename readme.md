@@ -1,6 +1,6 @@
 # First Step
 
-## Install venv first 
+## If it is not done yet on your machine, install venv 
 
 ```
 pip install virtualenv
