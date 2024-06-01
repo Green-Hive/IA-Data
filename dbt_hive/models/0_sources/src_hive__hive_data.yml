@@ -1,9 +1,0 @@
-version: 2
-
-sources:
-  - name: hive
-    schema: lake
-    database: hive
-    tables:
-      - name: hive_data
-        description: This table gathers all the data fetch from the captors on the Hives

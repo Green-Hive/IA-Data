@@ -1,9 +1,0 @@
-version: 2
-
-sources:
-  - name: hive
-    schema: lake
-    database: hive
-    tables:
-      - name: hive
-        description: This table shows informations about hives

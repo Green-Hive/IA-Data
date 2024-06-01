@@ -1,7 +1,0 @@
-version: 2
-models:
-- name: stg_hive__hive
-  description: This table gathers metadata about hives
-  columns:
-  - name: ID
-    description: Id of the Hive
