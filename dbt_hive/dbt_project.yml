@@ -1,0 +1,25 @@
+name: 'dbt_hive'
+config-version: 2
+version: '1.2.0'
+
+profile: 'hive'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+models:
+  dbt_hive:
+    +materialized: table
+    1_staging:
+      +materialized: table
+      +schema: STAGING
+    2_intermediate:
+      +materialized: table
+      +schema: INTERMEDIARY
+    3_marts:
+      +materialized: table
+    

@@ -1,0 +1,55 @@
+[0m23:40:15.191733 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BEE2FD7E90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BEE3281610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BEE32816D0>]}
+
+
+============================== 23:40:15.194588 | 63477984-17e0-410f-909c-5eab500cc165 ==============================
+[0m23:40:15.194588 [info ] [MainThread]: Running with dbt=1.8.1
+[0m23:40:15.195088 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'fail_fast': 'False', 'log_path': 'logs', 'profiles_dir': 'D:\\Computer\\Dev\\Epitech\\T-ESP\\IA-Data\\DB\\dbt_project', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt build', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m23:40:15.205101 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\Computer\Dev\Epitech\T-ESP\IA-Data\DB\dbt_project\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m23:40:15.206651 [debug] [MainThread]: Command `dbt build` failed at 23:40:15.206651 after 0.16 seconds
+[0m23:40:15.206651 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BEE31278F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BEE31623F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BEE3281700>]}
+[0m23:40:15.207111 [debug] [MainThread]: Flushing usage events
+[0m01:27:26.328044 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B8576D9A60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B8551D69F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B857480980>]}
+
+
+============================== 01:27:26.331544 | 3fd4b109-037b-4e1b-8dc1-1d8d30f4548e ==============================
+[0m01:27:26.331544 [info ] [MainThread]: Running with dbt=1.8.1
+[0m01:27:26.332545 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'version_check': 'True', 'log_path': 'D:\\Computer\\Dev\\Epitech\\T-ESP\\IA-Data\\logs', 'profiles_dir': 'C:\\Users\\Nabstark\\.dbt', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'log_format': 'default', 'introspect': 'True', 'target_path': 'None', 'invocation_command': 'dbt init users', 'send_anonymous_usage_stats': 'True'}
+[0m01:27:26.343043 [info ] [MainThread]: Setting up your profile.
+[0m01:43:08.384926 [error] [MainThread]: Encountered an error:
+
+[0m01:43:08.418749 [error] [MainThread]: Traceback (most recent call last):
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\dbt\cli\requires.py", line 138, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\dbt\cli\requires.py", line 101, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\dbt\cli\main.py", line 469, in init
+    results = task.run()
+              ^^^^^^^^^^
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\dbt\task\init.py", line 321, in run
+    self.setup_profile(profile_name)
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\dbt\task\init.py", line 263, in setup_profile
+    self.create_profile_from_target(adapter, profile_name=profile_name)
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\dbt\task\init.py", line 180, in create_profile_from_target
+    self.create_profile_from_profile_template(profile_template, profile_name)
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\dbt\task\init.py", line 164, in create_profile_from_profile_template
+    target = self.generate_target_from_input(prompts, initial_target)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\dbt\task\init.py", line 130, in generate_target_from_input
+    target[key] = click.prompt(
+                  ^^^^^^^^^^^^^
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\click\termui.py", line 164, in prompt
+    value = prompt_func(prompt)
+            ^^^^^^^^^^^^^^^^^^^
+  File "D:\Computer\Dev\Epitech\T-ESP\IA-Data\local\Lib\site-packages\click\termui.py", line 147, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m01:43:08.421243 [debug] [MainThread]: Command `dbt init` failed at 01:43:08.421243 after 942.28 seconds
+[0m01:43:08.421796 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B85742B260>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B857EADDF0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B857E05A90>]}
+[0m01:43:08.422301 [debug] [MainThread]: Flushing usage events

@@ -4,3 +4,4 @@
 *.ipynb
 *.env
 /local
+DB/dbt_hive/.user.yml
