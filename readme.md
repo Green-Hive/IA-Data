@@ -29,7 +29,6 @@ python -m venv local
 ## Install depedencies
 
 ```
-
 pip install -r ./DB/API/requirements.txt
 ```
 
