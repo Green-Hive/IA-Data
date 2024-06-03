@@ -1,1 +1,0 @@
-{"_invocation_id": "ccde3d1f-20e2-477e-b75e-939ea2d5a133", "linked": {"0": {"name": "source.dbt_hive.hive.hive", "type": "source", "succ": [2]}, "1": {"name": "source.dbt_hive.hive.hive_data", "type": "source", "succ": [3]}, "2": {"name": "model.dbt_hive.stg_hive__hive", "type": "model"}, "3": {"name": "model.dbt_hive.stg_hive__hive_data", "type": "model"}}}

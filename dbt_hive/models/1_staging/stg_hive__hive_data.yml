@@ -1,7 +1,0 @@
-version: 2
-models:
-- name: stg_hive__hive_data
-  description: This table gathers all the data fetch from the captors on the Hives
-  columns:
-  - name: HIVE_ID
-    description: Id of the Hive
