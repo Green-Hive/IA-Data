@@ -1,6 +1,6 @@
 # First Step
 
-## If it is not done yet on your machine, install venv 
+## If it is not done yet on your machine, install python. If you use pip3 replace below pip command by pip3 
 
 ```
 pip install virtualenv
