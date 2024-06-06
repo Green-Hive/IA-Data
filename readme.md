@@ -1,6 +1,12 @@
 # First Step
 
-## If it is not done yet on your machine, install python. If you use pip3 replace below pip command by pip3 
+ If it is not done yet on your machine, install [Python](https://www.python.org/downloads/).
+
+### Note
+
+If you use <sup>pip3</sup> replac <sup>pip</sup> with <sup>pip3</sup> 
+
+## Install virtualenv
 
 ```
 pip install virtualenv
@@ -29,7 +35,7 @@ python -m venv local
 ## Install depedencies
 
 ```
-pip install -r ./DB/API/requirements.txt
+pip install -r requirements.txt
 ```
 
 # Enjoy :)
