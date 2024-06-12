@@ -1,6 +1,12 @@
 # First Step
 
-## If it is not done yet on your machine, install venv 
+ If it is not done yet on your machine, install [Python](https://www.python.org/downloads/).
+
+### Note
+
+If you use <sup>pip3</sup> replac <sup>pip</sup> with <sup>pip3</sup> 
+
+## Install virtualenv
 
 ```
 pip install virtualenv
