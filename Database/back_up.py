@@ -2,6 +2,7 @@ import os
 import psycopg2 # type: ignore
 import pandas as pd # type: ignore
 from dotenv import load_dotenv # type: ignore
+from datetime import datetime
 
 load_dotenv()  # Load environment variables from .env file
 
@@ -42,6 +43,7 @@ class Lake:
             colnames = [desc[0] for desc in cursor.description]
 
             df = pd.DataFrame(result_source, columns=colnames)
+            df.insert(loc=0,column='backupDate',value= datetime.today().strftime('%Y-%m-%d'))
             target = table.replace('"', "")
             df.to_csv(f'{target}.csv', sep=';', index=False)
             print(f'{target}.csv successfully created')
@@ -93,21 +95,19 @@ class Lake:
 
 
 # Usage
-lake = Lake(queries='queries.sql')
+lake = Lake(queries='queries_backup.sql')
 
 tables_source = ['"User"','"Hive"','"HiveData"','"Session"','"Alert"','"_prisma_migrations"']
-tables_target = ['"user"','"hive"','"hive_data"','"session"','"alert"','"prisma_migrations"']
+tables_target = ['"user_backup"','"hive_backup"','"hive_data_backup"','"session_backup"','"alert_backup"','"prisma_migrations_backup"']
 
 for table in tables_source:
     lake.get_source_data(env_prefix='SOURCE',schema='public', table=table)
-
-lake.remake_db(env_prefix='TARGET')
 
 for i in range(len(tables_target)):
     file_name = tables_source[i].replace('"','') 
     file_name_raw =  fr"{file_name}.csv"
 
-    lake.copy_from_csv(env_prefix='TARGET', table=tables_target[i], csv_file_path=file_name_raw)
+    lake.copy_from_csv(env_prefix='BACKUP_TARGET', table=tables_target[i], csv_file_path=file_name_raw)
 
 
 
